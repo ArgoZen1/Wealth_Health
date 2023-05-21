@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useReducer, useContext, useEffect } from 'react';
 import Datepicker from '../../components/Datepicker';
 import StateSelect from '../../components/StateSelect';
 import { states } from '../../data/states';
@@ -7,79 +7,77 @@ import { EmployeeContext } from '../../contexts/EmployeeContext';
 import Modal from '../../components/Modal/Modal.js';
 import "./Page1.css";
 
-const Page1 = () => {
+// L'état initial du formulaire
+const initialState = {
+  firstName: '',
+  lastName: '',
+  city: '',
+  street: '',
+  zipCode: '',
+  dateOfBirth: new Date().toISOString().split('T')[0],
+  startDate: new Date().toISOString().split('T')[0],
+  department: '',
+  state: '',
+  modalIsOpen: false,
+};
 
+// Le réducteur qui gère les actions d'état.
+function reducer(state, action) {
+  switch (action.type) {
+    case 'setField':
+      return { ...state, [action.field]: action.value };
+    case 'setModal':
+      return { ...state, modalIsOpen: action.isOpen };
+    default:
+      return state;
+  }
+}
+
+const Page1 = () => {
+  // Définition des départements
   const departments = ["Sales", "Marketing", "Engineering", "Human Resources", "Legal"];
 
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [city, setCity] = useState('');
-  const [street, setStreet] = useState('');
-  const [zipCode, setZipCode] = useState('');
-  const [dateOfBirth, setDateOfBirth] = useState(new Date().toISOString().split('T')[0]);
-  const [startDate, setStartDate] = useState(new Date().toISOString().split('T')[0]);
-  const [department, setDepartment] = useState('');
-  const [state, setState] = useState('');
-  const [modalIsOpen, setModalIsOpen] = useState(false);  // Ajoutez ceci pour gérer l'état de la modal
+  // Utilisation de useReducer pour gérer l'état du formulaire
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-  useEffect(() => {
-    if (departments.length > 0) {
-      setDepartment(departments[0]);
-    } else {
-      setDepartment('Default Department');
-    }
-  }, []);
-
-  useEffect(() => {
-    if (states.length > 0) {
-      setState(states[0].name);
-    } else {
-      setState('Default State');
-    }
-  }, []);
-
+  // Utilisation du contexte des employés pour ajouter un nouvel employé
   const { addEmployee } = useContext(EmployeeContext);
 
-  const handleDateChange = (e) => {
-    console.log('New Start Date:', e.target.value);
-    setStartDate(e.target.value);
+  // Au montage du composant, nous définissons les valeurs par défaut de départment et de state dans le formulaire
+  useEffect(() => {
+    dispatch({ type: 'setField', field: 'department', value: departments[0] || 'Default Department' });
+    dispatch({ type: 'setField', field: 'state', value: states.length > 0 ? states[0].name : 'Default State' });
+  }, []);
+
+  // Un gestionnaire générique pour gérer les changements de champ de formulaire
+  const handleChange = (field, value) => {
+    dispatch({ type: 'setField', field, value });
   };
 
-  const handleBirthDateChange = (e) => {
-    console.log('New Birth Date:', e.target.value);
-    setDateOfBirth(e.target.value);
-  };
-
-  const handleChange = (event) => {
-    console.log('New Department:', event.target.value);
-    setDepartment(event.target.value);
-  };
-
-  const setStateValue = (e) => {
-    console.log('New State:', e.target.value);
-    setState(e.target.value);
-  };
-
+  // Un gestionnaire pour soumettre le formulaire
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Ajoute l'employé en utilisant le contexte des employés
     addEmployee({
-      firstName,
-      lastName,
-      dateOfBirth,
-      startDate,
-      department,
-      street,
-      city,
-      state,
-      zipCode
+      firstName: state.firstName,
+      lastName: state.lastName,
+      dateOfBirth: state.dateOfBirth,
+      startDate: state.startDate,
+      department: state.department,
+      street: state.street,
+      city: state.city,
+      state: state.state,
+      zipCode: state.zipCode,
     });
 
-    setModalIsOpen(true);
-  }
+    // Ouvre la modal pour indiquer que l'employé a été ajouté
+    dispatch({ type: 'setModal', isOpen: true });
+  };
 
+  // Fonction pour fermer la modal
   const closeModal = () => {
-    setModalIsOpen(false);
+    dispatch({ type: 'setModal', isOpen: false });
   };
 
   return (
@@ -92,45 +90,45 @@ const Page1 = () => {
               <div className='container_first'>
                 <label>
                   First Name:
-                  <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                  <input type="text" value={state.firstName} onChange={(e) => handleChange('firstName', e.target.value)} />
                 </label>
                 <br />
                 <label>
                   Last Name:
-                  <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                  <input type="text" value={state.lastName} onChange={(e) => handleChange('lastName', e.target.value)} />
                 </label>
                 <div className='container-date'>
-                  <Datepicker label="Date of Birth " value={dateOfBirth} onChange={handleBirthDateChange} />
+                  <Datepicker label="Date of Birth " value={state.dateOfBirth} onChange={(date) => handleChange('dateOfBirth', date)} />
                   <br />
-                  <Datepicker label="Start Date " value={startDate} onChange={handleDateChange} />
+                  <Datepicker label="Start Date " value={state.startDate} onChange={(value) => handleChange('startDate', value)} />
                 </div>
               </div>
               <div className='container_adress'>
                 <h3>Address</h3>
                 <label>
                   Street:
-                  <input type="text" value={street} onChange={(e) => setStreet(e.target.value)} />
+                  <input type="text" value={state.street} onChange={(e) => handleChange('street', e.target.value)} />
                 </label>
                 <br />
                 <label>
                   City:
-                  <input type="text" value={city} onChange={(e) => setCity(e.target.value)} />
+                  <input type="text" value={state.city} onChange={(e) => handleChange('city', e.target.value)} />
                 </label>
                 <br />
                 <label>
                   State:
-                  <StateSelect value={state} onChange={setStateValue} />
+                  <StateSelect value={state.state} onChange={(selectedOption) => handleChange('state', selectedOption.value)} />
                 </label>
                 <br />
                 <label>
                   Zip Code:
-                  <input type="text" value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
+                  <input type="text" value={state.zipCode} onChange={(e) => handleChange('zipCode', e.target.value)} />
                 </label>
                 <br />
                 <h4>Department</h4>
                 <label>
                   Department:
-                  <DepartmentSelect value={department} onChange={handleChange} />
+                  <DepartmentSelect value={state.department} onChange={(selectedOption) => handleChange('department', selectedOption.value)} />
                 </label>
               </div>
             </div>
@@ -140,7 +138,7 @@ const Page1 = () => {
           </form>
         </div>
       </section>
-      <Modal isOpen={modalIsOpen} onClose={closeModal}>
+      <Modal isOpen={state.modalIsOpen} onClose={closeModal}>
         <h2>Employee <em>Created</em> !</h2>
       </Modal>
     </div>

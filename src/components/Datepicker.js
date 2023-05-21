@@ -1,9 +1,9 @@
 import React from "react";
 
 const Datepicker = ({ label, value, onChange }) => {
-
   const handleDateChange = (e) => {
-    onChange(e);
+    // Transmettez seulement la valeur de l'input
+    onChange(e.target.value);
   };
 
   return (
