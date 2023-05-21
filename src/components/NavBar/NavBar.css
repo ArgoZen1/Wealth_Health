@@ -1,0 +1,47 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: black;
+    position: relative;
+    overflow: hidden;
+}
+
+.container-logo-text {
+    display: flex;
+    align-items: center;
+}
+
+h1 {
+    padding-left: 2rem;
+    position: relative;
+    display: inline-block;
+}
+h1::before {
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background-color: #247ad6;
+  border-radius: 50%; /* Pour rendre le point circulaire */
+  z-index: 5; /* Pour mettre le point derrière le texte */
+  top: 0.30rem;
+  left: 2px;
+}
+.container-link {
+    margin-right: 1rem;    
+}
+.container-link a {
+    color: black;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+.container-link a:hover {
+    color: #247ad6;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+.my-link {
+    color: white;
+    text-decoration: none;
+}

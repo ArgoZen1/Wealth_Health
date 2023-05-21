@@ -1,0 +1,54 @@
+input[type="text"],
+select {
+  padding: 10px;
+  border: rgb(236, 233, 233) 2px solid;
+  border-radius: 5px;
+  color: #333;
+  font-size: 16px;
+  margin-bottom: 0.5rem;
+}
+
+input[type="text"]:focus,
+select:focus {
+  border: #247ad6 2px solid;
+  outline: none;
+  background-color: #fdfdfd;
+}
+.select-number {
+    padding: 8.5px;
+    margin-left: 5px;
+}
+table {
+    margin-top: 1rem;
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    border: 1px solid #dee2e6;
+    background-color: white;
+}
+table th, td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border: 1px solid #dee2e6;
+    text-align: center;
+}
+p {
+    margin-left: 1rem;
+    font-weight: bold;
+}
+.container-button-pre-next {
+    margin-left: 0.5rem;
+}
+.container-button-pre-next button {
+    padding: 1rem;
+    border: none;
+    background-color: #247ad6;
+    color: white;
+    margin-left: 0.5rem;
+    border-radius: 5px;
+}
+.container-button-pre-next button:hover {
+    background-color: #0056b3;
+    cursor: pointer;
+}

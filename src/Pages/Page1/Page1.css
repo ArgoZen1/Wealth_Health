@@ -1,0 +1,131 @@
+body {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background-image: url(https://img.freepik.com/vecteurs-libre/fond-blanc-elegant-design-ondule_1017-39102.jpg?w=1480&t=st=1684433036~exp=1684433636~hmac=fabb646be6c181fc7845fd5c25fa02247c0e4e7befaf53929d19d12ace001e6d);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center; 
+  min-height: 100vh; 
+  }
+  
+  .container-global {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+  }
+  
+  .section-form {
+    width: 100%;
+    max-width: 700px;
+    background-color: white;
+    box-shadow: 0px 14px 28px 8px rgba(0, 0, 0, 0.1), 0px 10px 10px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 10px 40px 20px;
+    box-sizing: border-box;
+  }
+  
+  .section-form h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .container-form {
+    
+    gap: 20px;
+  }
+  
+  .container_first {
+    flex-basis: 50%;
+  }
+  
+  .container_adress {
+    flex-basis: 40%;
+  }
+  
+  .container_button {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .button-page1 {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+    margin-top: 0.5rem;
+  }
+  
+  .button-page1:hover {
+    background-color: #0056b3;
+  }
+  
+  .container_adress h3,
+  .container_adress h4 {
+    margin-bottom: 10px;
+    margin-top: 20px;
+    font-size: 20px;
+    color: #333;
+  }
+  .container-form input[type="text"],
+.container-form select {
+  width: 100%;
+  padding: 10px;
+  border: rgb(236, 233, 233) 2px solid;
+  border-radius: 5px;
+  color: #333;
+  font-size: 16px;
+  margin-bottom: 0.5rem;
+}
+.container-form input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border: rgb(236, 233, 233) 2px solid;
+    border-radius: 5px;
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 0.5rem;
+}
+.container-form input[type="date"]:focus {
+    border: #247ad6 2px solid;
+    outline: none;
+    background-color: #fdfdfd;
+}
+
+.container-form input[type="text"]:focus,
+.container-form select:focus {
+  border: #247ad6 2px solid;
+  outline: none;
+  background-color: #fdfdfd;
+}
+.container-date {
+    display: flex;
+    justify-content:space-evenly;  
+    margin-top: 15px;
+}
+select::-webkit-scrollbar {
+    width: 10px; /* Largeur de la barre de défilement */
+  }
+  
+  select::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Couleur de fond de la piste de défilement */
+  }
+  
+  select::-webkit-scrollbar-thumb {
+    background-color: #247ad6; /* Couleur de la barre de défilement */
+  }
+  
+  /* Pour les navigateurs basés sur Firefox */
+  select {
+    scrollbar-width: thin;
+    scrollbar-color: #247ad6 #f1f1f1;
+  }
+ em {
+    color: #247ad6;
+ }
+
+
