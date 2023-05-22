@@ -9,7 +9,7 @@ function StateSelect({ value, onChange }) {
   ));
 
   return (
-    <select value={value} onChange={onChange}>
+    <select value={value} onChange={(e) => onChange(e.target.value)}>
       {options}
     </select>
   );

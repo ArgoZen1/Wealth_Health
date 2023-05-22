@@ -1,10 +1,10 @@
 body {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     background-image: url(https://img.freepik.com/vecteurs-libre/fond-blanc-elegant-design-ondule_1017-39102.jpg?w=1480&t=st=1684433036~exp=1684433636~hmac=fabb646be6c181fc7845fd5c25fa02247c0e4e7befaf53929d19d12ace001e6d);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center; 
-  min-height: 100vh; 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center; 
+    min-height: 100vh; 
   }
   
   .container-global {
@@ -29,8 +29,7 @@ body {
     margin-bottom: 15px;
   }
   
-  .container-form {
-    
+  .container-form { 
     gap: 20px;
   }
   
@@ -72,14 +71,14 @@ body {
     color: #333;
   }
   .container-form input[type="text"],
-.container-form select {
-  width: 100%;
-  padding: 10px;
-  border: rgb(236, 233, 233) 2px solid;
-  border-radius: 5px;
-  color: #333;
-  font-size: 16px;
-  margin-bottom: 0.5rem;
+  .container-form select {
+    width: 100%;
+    padding: 10px;
+    border: rgb(236, 233, 233) 2px solid;
+    border-radius: 5px;
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 0.5rem;
 }
 .container-form input[type="date"] {
     width: 100%;
@@ -98,9 +97,9 @@ body {
 
 .container-form input[type="text"]:focus,
 .container-form select:focus {
-  border: #247ad6 2px solid;
-  outline: none;
-  background-color: #fdfdfd;
+    border: #247ad6 2px solid;
+    outline: none;
+    background-color: #fdfdfd;
 }
 .container-date {
     display: flex;
@@ -127,5 +126,9 @@ select::-webkit-scrollbar {
  em {
     color: #247ad6;
  }
-
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
 

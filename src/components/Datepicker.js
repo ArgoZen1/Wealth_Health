@@ -1,8 +1,8 @@
 import React from "react";
 
-const Datepicker = ({ label, value, onChange }) => {
+const Datepicker = ({ label, value, onChange, error }) => {
   const handleDateChange = (e) => {
-    // Transmettez seulement la valeur de l'input
+
     onChange(e.target.value);
   };
 
@@ -10,6 +10,7 @@ const Datepicker = ({ label, value, onChange }) => {
     <div>
       <label>{label}:</label>
       <input type="date" value={value} onChange={handleDateChange} />
+      {error && <div className="error">{error}</div>}
     </div>
   );
 };
